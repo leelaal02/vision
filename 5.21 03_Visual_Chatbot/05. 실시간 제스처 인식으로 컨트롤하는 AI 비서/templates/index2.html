@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>AI 제스처 비서</title>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</head>
+<body>
+    <h2>웹캠으로 손을 보여주세요</h2>
+    <img src="{{ url_for('video_feed') }}" width="640" height="480">
+    
+    <div>
+        <button id="getInfoButton">AI 응답 보기</button>
+        <pre id="infoBox" style="margin-top: 10px;"></pre>
+    </div>
+</body>
+</html>

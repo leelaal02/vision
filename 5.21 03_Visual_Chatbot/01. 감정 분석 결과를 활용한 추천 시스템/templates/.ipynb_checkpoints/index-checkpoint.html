@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>감정 분석 추천 시스템</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: left;
+            margin: 50px;
+        }
+        #result {
+            margin-top: 20px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <h1>감정 분석을 통한 추천 시스템</h1>
+    <textarea id="userInput" rows="5" cols="50" placeholder="여기에 감정을 표현하는 문장을 입력하세요..."></textarea>
+    <br>
+    <button onclick="analyzeSentiment()">감정 분석 하기</button>
+    <button onclick="resetChat()">채팅 초기화</button>
+    
+    <div id="result">
+        <h2>분석 결과</h2>
+        <p><strong>감정:</strong> <span id="emotion"></span></p>
+        <h3>추천 목록</h3>
+        <h4>음악</h4>
+        <ul id="musicList"></ul>
+        <h4>영화</h4>
+        <ul id="movieList"></ul>
+        <h4>뉴스</h4>
+        <ul id="newsList"></ul>
+    </div>
+    
+    <script>
+        function analyzeSentiment() {
+            let userText = document.getElementById("userInput").value;
+            if (userText.trim() === "") {
+                alert("텍스트를 입력하세요.");
+                return;
+            }
+            
+            $.ajax({
+                url: '/analyze',
+                type: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify({ text: userText }),
+                success: function(response) {
+                    document.getElementById("emotion").innerText = response.emotion;
+                    
+                    let musicList = document.getElementById("musicList");
+                    let movieList = document.getElementById("movieList");
+                    let newsList = document.getElementById("newsList");
+                    
+                    musicList.innerHTML = "";
+                    movieList.innerHTML = "";
+                    newsList.innerHTML = "";
+                    
+                    response.recommendations.music.forEach(item => {
+                        let li = document.createElement("li");
+                        li.innerText = item;
+                        musicList.appendChild(li);
+                    });
+                    
+                    response.recommendations.movies.forEach(item => {
+                        let li = document.createElement("li");
+                        li.innerText = item;
+                        movieList.appendChild(li);
+                    });
+                    
+                    response.recommendations.news.forEach(item => {
+                        let li = document.createElement("li");
+                        li.innerText = item;
+                        newsList.appendChild(li);
+                    });
+                    
+                    document.getElementById("result").style.display = "block";
+                }
+            });
+        }
+        
+        function resetChat() {
+            document.getElementById("userInput").value = "";
+            document.getElementById("result").style.display = "none";
+            document.getElementById("emotion").innerText = "";
+            document.getElementById("musicList").innerHTML = "";
+            document.getElementById("movieList").innerHTML = "";
+            document.getElementById("newsList").innerHTML = "";
+        }
+    </script>
+</body>
+</html>

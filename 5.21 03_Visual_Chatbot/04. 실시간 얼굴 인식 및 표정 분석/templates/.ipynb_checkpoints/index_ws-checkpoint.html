@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WebSocket 영상 스트리밍</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.4.1/socket.io.js"></script>
+</head>
+<body>
+    <h1>🧐😀실시간 스트리밍 표정 분석😠😲</h1>
+    <img id="video_frame" width="35%">
+
+    <p><strong>🟥 🟧 🟨 🟩 🟦 🟪 🟫 🟥 🟧 🟨 🟩 🟦 🟪 🟫 현재 감정 :  <span id="emotion">[Neutral]</span></strong></p>
+    
+    <script>
+        var socket = io.connect('http://' + document.domain + ':' + location.port);
+        var img = document.getElementById("video_frame");
+
+        socket.on('frame', function(data) {
+            img.src = 'data:image/jpeg;base64,' + data;
+        });
+        
+        // 서버에서 감정 분석 결과를 받아서 업데이트
+        socket.on("emotion_update", function(data) {
+            document.getElementById("emotion").innerText = data.emotion;
+        });
+        setInterval(() => {
+            socket.emit('request_frame');
+        }, 30);  // 30ms마다 프레임 요청 (초당 약 33FPS)
+    </script>
+</body>
+</html>

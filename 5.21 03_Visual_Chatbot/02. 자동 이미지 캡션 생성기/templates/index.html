@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>자동 이미지 캡션 생성기</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: left; margin: 50px; }
+        #preview { max-width: 400px; margin-top: 20px; }
+        #caption { font-size: 14px; font-weight: bold; margin-top: 20px; }
+    </style>
+</head>
+<body>
+
+    <h2>자동 이미지 캡션 생성기</h2>
+    <input type="file" id="fileInput">
+    <img id="preview" style="display: none;">
+    <p id="caption"></p>
+
+    <script>
+        document.getElementById('fileInput').addEventListener('change', function(event) {
+            let file = event.target.files[0];
+            if (!file) return;
+
+            let reader = new FileReader();
+            reader.onload = function(e) {
+                document.getElementById('preview').src = e.target.result;
+                document.getElementById('preview').style.display = "block";
+            };
+            reader.readAsDataURL(file);
+
+            let formData = new FormData();
+            formData.append("file", file);
+
+            fetch('/upload', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('caption').innerText = "캡션 : " + data.caption;
+            })
+            .catch(error => {
+                document.getElementById('caption').innerText = "오류 발생!";
+                console.error(error);
+            });
+        });
+    </script>
+
+</body>
+</html>

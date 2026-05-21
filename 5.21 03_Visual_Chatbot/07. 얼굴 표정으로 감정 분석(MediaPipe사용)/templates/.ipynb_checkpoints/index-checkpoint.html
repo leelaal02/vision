@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>AI Emotion Response</title>
+    <style>
+        #emotion {
+            font-size: 24px;
+            color: blue;
+            margin-top: 10px;
+        }
+        #response {
+            font-size: 20px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>실시간 감정 분석</h1>
+
+    <img id="video_feed" src="{{ url_for('video_feed') }}" width="640" height="480" alt="Video Feed">
+    
+    <div id="emotion">감정 분석 중...</div>
+
+    <button onclick="sendEmotion()">감정 기반 응답 요청</button>
+
+    <p id="response"></p>
+
+<script>
+let currentEmotion = "neutral"; // 기본값
+
+// 감정 업데이트 (5초마다)
+setInterval(() => {
+    fetch('/current_emotion')
+    .then(response => response.json())
+    .then(data => {
+        currentEmotion = data.emotion;
+        document.getElementById('emotion').innerText = "현재 감정: " + currentEmotion;
+    })
+    .catch(error => console.error('감정 가져오기 실패:', error));
+}, 5000); // 5초마다 감정 상태 갱신
+
+// 버튼 클릭 시 AI 응답 요청
+function sendEmotion() {
+    fetch('/get_response', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({ emotion: currentEmotion })  // 현재 감정 상태를 전송
+    })
+    .then(response => response.json())
+    .then(data => {
+        document.getElementById('response').innerText = data.response;
+    })
+    .catch(error => console.error('응답 요청 실패:', error));
+}
+</script>
+
+</body>
+</html>

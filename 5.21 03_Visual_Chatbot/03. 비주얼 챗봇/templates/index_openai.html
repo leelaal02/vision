@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>비주얼 챗봇</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; }
+        textarea { width: 80%; height: 100px; margin: 10px 0; }
+        button { padding: 10px 20px; margin: 10px; font-size: 16px; }
+        video, canvas { display: block; margin: 10px auto; }
+        #chatHistory { width: 80%; margin: auto; text-align: left; border: 1px solid #ccc; padding: 10px; }
+    </style>
+</head>
+<body>
+
+    <h1>비주얼 챗봇</h1>
+
+    <textarea id="textInput" placeholder="질문을 입력하세요..."></textarea>
+    <br>
+    <button onclick="sendQuestion()">질문하기</button>
+    <button onclick="clearChat()">채팅 초기화</button>
+
+    <h2>📷 웹캠을 사용하여 질문 입력</h2>
+    <video id="video" width="320" height="240" autoplay></video>
+    <br>
+    <button onclick="captureImage()">📸 사진 찍기</button>
+    <canvas id="canvas" width="320" height="240" style="display: none;"></canvas>
+
+    <h2>💬 채팅 내역</h2>
+    <div id="chatHistory"></div>
+
+    <script src="/static/camera_openai.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>실시간 얼굴 표정 감지</title>
+    <style>
+        body { text-align: center; font-family: Arial, sans-serif; }
+        #video { width: 640px; height: 480px; border: 2px solid black; }
+        #emotion { font-size: 24px; margin-top: 10px; }
+    </style>
+</head>
+<body>
+    <h1>실시간 얼굴 표정 감지</h1>
+    <img id="video" src="" alt="Webcam Feed">
+    <div id="emotion">표정 분석 결과: 없음</div>
+
+    <script>
+        const ws = new WebSocket("ws://localhost:8000/ws");
+
+        ws.onmessage = function(event) {
+            const data = JSON.parse(event.data);
+            document.getElementById("video").src = "data:image/jpeg;base64," + data.image;
+
+            if (data.faces.length > 0) {
+                let emotionText = "표정 분석 결과: ";
+                data.faces.forEach(face => {
+                    emotionText += `[${face.emotion}] `;
+                });
+                document.getElementById("emotion").innerText = emotionText;
+            } else {
+                document.getElementById("emotion").innerText = "표정 분석 결과: 얼굴 없음";
+            }
+        };
+
+        ws.onerror = function(event) {
+            console.error("WebSocket error:", event);
+        };
+    </script>
+</body>
+</html>

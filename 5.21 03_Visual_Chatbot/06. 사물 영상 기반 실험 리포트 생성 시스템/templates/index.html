@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>AI 마이크로 실험실</title>
+</head>
+<body>
+    <h2>📷 카메라에 실험 장면을 보여주고 리포트를 받아보세요</h2>
+
+    <form action="/capture" method="post">
+        <button type="submit">실험 장면 캡처하기</button>
+    </form>
+
+    {% if image_url %}
+        <h3>📸 캡처된 이미지:</h3>
+        <img src="{{ image_url }}" width="480">
+    {% endif %}
+
+    {% if report %}
+        <h3>🧪 AI 실험 리포트:</h3>
+        <p>{{ report }}</p>
+    {% endif %}
+</body>
+</html>
