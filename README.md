@@ -35,6 +35,7 @@ https://wikidocs.net/226636
 --------------------
 
 03_Vision API와 이미지 기반 챗봇 서비스 개발
+--------------------
 
 멀티모달 모델(wiki 문서):
 https://namu.wiki/w/%EB%A9%80%ED%8B%B0%EB%AA%A8%EB%8B%AC%20%EB%AA%A8%EB%8D%B8
@@ -51,6 +52,7 @@ https://aihub.or.kr/
 --------------------
 
 04_LLM 에이전트 개발
+--------------------
 
 LangChain 홈페이지
 https://www.langchain.com/
@@ -65,6 +67,7 @@ https://docs.langchain.com/oss/python/releases/langchain-v1
 --------------------
 
 05_Vision_Transformer
+--------------------
 
 A Visual Guide to Vision Transformers:
 https://discuss.pytorch.kr/t/vision-transformer-a-visual-guide-to-vision-transformers/4158
@@ -90,6 +93,7 @@ https://arxiv.org/abs/1706.03762
 --------------------
 
 06_Object_Detection
+--------------------
 
 Ultralytics YOLO :
 https://www.ultralytics.com/
