@@ -1,5 +1,5 @@
 01_Cursor AI 활용 바이브 코딩
-
+--------------------
 커서(Cursor) AI 코드 편집기 사용법 문서 :
 https://wikidocs.net/278669
 
@@ -17,9 +17,11 @@ https://developers.openai.com/api/docs/pricing
 
 OpenAI 사용법 관련 위키문서 :
 https://wikidocs.net/book/18293
+
 --------------------
 
 02_딥러닝_CNN 모델 개발
+--------------------
 
 파이토치 설치 : 초간단 PyTorch :
 https://wikidocs.net/294888
@@ -29,6 +31,7 @@ https://wikidocs.net/book/2788
 
 파이토치 : 딥러닝
 https://wikidocs.net/226636
+
 --------------------
 
 03_Vision API와 이미지 기반 챗봇 서비스 개발
@@ -44,6 +47,7 @@ https://huggingface.co/docs/transformers/model_doc/llava
 
 AI Hub :
 https://aihub.or.kr/
+
 --------------------
 
 04_LLM 에이전트 개발
@@ -57,6 +61,7 @@ https://smith.langchain.com/
 
 LangChain 1.0 정식 버전 릴리즈 : 2025년 10월
 https://docs.langchain.com/oss/python/releases/langchain-v1
+
 --------------------
 
 05_Vision_Transformer
@@ -81,6 +86,7 @@ https://arxiv.org/abs/2106.08265
 
 Attention Is All You Need :
 https://arxiv.org/abs/1706.03762
+
 --------------------
 
 06_Object_Detection
@@ -110,5 +116,6 @@ https://www.makesense.ai/
 
 Weights & Bias : model monitoring
 https://wandb.ai/site/ko/
+
 --------------------
 
